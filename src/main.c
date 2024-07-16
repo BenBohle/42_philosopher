@@ -84,7 +84,7 @@ void *philosopher_routine(void *arg) {
         better_usleep(specs->time_to_sleep);
 
         // Häufigere Überprüfung des Todeszustands
-        better_usleep(100); // 1 ms Pause zwischen den Überprüfungen
+        // better_usleep(100); // 1 ms Pause zwischen den Überprüfungen
     }
 
     return NULL;
