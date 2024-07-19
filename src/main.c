@@ -71,12 +71,6 @@ void *philosopher_routine(void *arg) {
     t_specs *specs = philo->specs;
 
     while (1) {
-        // long current_time = get_current_time();
-        // if (current_time - philo->last_meal > specs->time_to_die) {
-        //     print_status(philo->id, "died");
-        //     specs->stop = 1;
-        //     break;
-        // }
 
 		pthread_mutex_lock(&specs->stop_mutex);
 		int stop = specs->stop;

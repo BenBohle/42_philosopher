@@ -6,7 +6,7 @@
 /*   By: bbohle <bbohle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 15:40:20 by bbohle            #+#    #+#             */
-/*   Updated: 2024/07/19 17:14:46 by bbohle           ###   ########.fr       */
+/*   Updated: 2024/07/19 19:30:33 by bbohle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void *monitoring(void *arg) {
         counter = 0;
         while (counter < specs->n_philos) {
             current_time = get_current_time();
+			// printf("start %ld >? %d\n", current_time - philo[counter].last_meal, specs->time_to_die);
             if (current_time - philo[counter].last_meal > specs->time_to_die) {
                 pthread_mutex_lock(&specs->stop_mutex);
 				specs->stop = 1;
