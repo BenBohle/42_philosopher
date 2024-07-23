@@ -6,7 +6,7 @@
 /*   By: bbohle <bbohle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 15:17:56 by bbohle            #+#    #+#             */
-/*   Updated: 2024/07/19 17:22:26 by bbohle           ###   ########.fr       */
+/*   Updated: 2024/07/23 15:30:33 by bbohle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct s_specs
     int time_to_eat;
     int time_to_sleep;
     int n_to_eat;
+	int eaten_philos;
     pthread_mutex_t *forks;
     pthread_mutex_t lock;
     int stop;
@@ -54,6 +55,10 @@ long get_current_time();
 void better_usleep(int microseconds);
 void *monitoring(void *arg);
 int check_input(int argc, char **argv);
+
+void init_simulation(int argc, char **argv, t_specs *specs, t_philo **philos);
+void create_philosopher_threads(t_philo *philos, t_specs *specs, pthread_t *threads);
+void create_monitor_thread(pthread_t *monitor_thread, t_philo *philos);
 
 
 #endif

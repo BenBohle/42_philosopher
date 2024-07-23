@@ -1,3 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bbohle <bbohle@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/07/23 13:21:12 by bbohle            #+#    #+#             */
+/*   Updated: 2024/07/23 13:21:33 by bbohle           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../includes/philo.h"
+#include "../includes/stylesheet.h"
+
 int is_not_number(char *str) {
 	int counter;
 
@@ -19,12 +34,13 @@ int check_input(int argc, char **argv) {
 	}
 
 	counter = 1;
-	while (counter < argc)
+	while (counter != argc)
 	{
 		if (is_not_number(argv[counter]) == 1)
 			return 1;
 		counter++;
 	}
+	// max int etc wahrscheinlich noch
 	
 	return 0;
 }
