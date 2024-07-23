@@ -83,12 +83,19 @@ void *philosopher_routine(void *arg) {
         print_status(philo->id, "is thinking", specs);
 
         // Gabeln nehmen
-        pthread_mutex_lock(&specs->lock);
-        pthread_mutex_lock(&specs->forks[philo->left_fork]);
-        print_status(philo->id, "has taken a fork", specs);
-        pthread_mutex_lock(&specs->forks[philo->right_fork]);
-        print_status(philo->id, "has taken a fork", specs);
-        pthread_mutex_unlock(&specs->lock);
+        if (philo->id % 2 == 0) {
+            pthread_mutex_lock(&specs->lock);
+            pthread_mutex_lock(&specs->forks[philo->left_fork]);
+            print_status(philo->id, "has taken a fork", specs);
+            pthread_mutex_lock(&specs->forks[philo->right_fork]);
+            print_status(philo->id, "has taken a fork", specs);
+            pthread_mutex_unlock(&specs->lock);
+        } else {
+            pthread_mutex_lock(&specs->forks[philo->right_fork]);
+            print_status(philo->id, "has taken right fork");
+            pthread_mutex_lock(&specs->forks[philo->left_fork]);
+            print_status(philo->id, "has taken left fork");
+        }
 
         // Essen
         print_status(philo->id, "is eating", specs);
