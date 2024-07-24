@@ -6,7 +6,7 @@
 /*   By: bbohle <bbohle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 14:40:15 by bbohle            #+#    #+#             */
-/*   Updated: 2024/07/24 01:01:51 by bbohle           ###   ########.fr       */
+/*   Updated: 2024/07/24 15:56:17 by bbohle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,22 +40,25 @@ void	print_status(int id, const char *status, t_specs *specs)
 {
 	long	current_time;
 	long	relative_timestamp;
+	int		stop;
 
 	current_time = get_current_time();
 	relative_timestamp = current_time - specs->start_time;
 	pthread_mutex_lock(&specs->stop_mutex);
-	// int stop = specs->stop;
+	stop = specs->stop;
 	pthread_mutex_unlock(&specs->stop_mutex);
-	// if (stop == 0) {
-	printf("%ld %d %s\n", relative_timestamp, id, status);
-	// }
+	if (stop == 0)
+	{
+		printf("%ld %d %s\n", relative_timestamp, id, status);
+	}
 }
 
-void	print_status_dead(int id, const char *status)
+void	print_status_dead(int id, const char *status, t_specs *specs)
 {
-	long	timestamp;
+	long	current_time;
+	long	relative_timestamp;
 
-	timestamp = get_current_time();
-	// long relative_timestamp = current_time - specs->start_time;
-	printf("%ld %d %s\n", timestamp, id, status);
+	current_time = get_current_time();
+	relative_timestamp = current_time - specs->start_time;
+	printf("%ld %d %s\n", relative_timestamp, id, status);
 }

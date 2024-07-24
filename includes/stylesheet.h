@@ -6,7 +6,7 @@
 /*   By: bbohle <bbohle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 15:17:39 by bbohle            #+#    #+#             */
-/*   Updated: 2024/07/19 17:00:31 by bbohle           ###   ########.fr       */
+/*   Updated: 2024/07/24 15:46:35 by bbohle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 #define UNDERLINE "\033[4m"
 #define BOLD "\033[1m"
 
-void start_screen();
-void wrong_input();
-void print_status(int id, const char *status, t_specs *specs);
-void print_status_dead(int id, const char *status);
+void	start_screen(void);
+void	wrong_input(void);
+void	print_status(int id, const char *status, t_specs *specs);
+void	print_status_dead(int id, const char *status, t_specs *specs);

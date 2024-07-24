@@ -6,7 +6,7 @@
 /*   By: bbohle <bbohle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 13:20:49 by bbohle            #+#    #+#             */
-/*   Updated: 2024/07/24 01:27:50 by bbohle           ###   ########.fr       */
+/*   Updated: 2024/07/24 19:01:27 by bbohle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ void	cleanup(t_specs *specs)
 		pthread_mutex_destroy(&specs->forks[counter]);
 		counter++;
 	}
-	pthread_mutex_destroy(&specs->lock);
+	// pthread_mutex_destroy(&specs->lock);
 	pthread_mutex_destroy(&specs->stop_mutex);
 	free(specs->forks);
 }
 
-void	join_threads(pthread_t *threads, int n_philos,
+int	join_threads(pthread_t *threads, int n_philos,
 		pthread_t *monitor_thread)
 {
 	int	counter;
@@ -41,9 +41,10 @@ void	join_threads(pthread_t *threads, int n_philos,
 	}
 	if (pthread_join(*monitor_thread, NULL) != 0)
 	{
-		perror("Failed to join watcher thread");
-		// Fehlerbehandlung
+		printf("Error joining monitor thread\n");
+		return (EXIT_FAILURE);
 	}
+	return (0);
 }
 
 int	main(int argc, char **argv)
@@ -56,17 +57,18 @@ int	main(int argc, char **argv)
 	if (check_input(argc, argv) == 1)
 		start_screen();
 	if (is_n_to_eat_zero(argc, argv) == 1 || check_input(argc, argv) == 1)
-		return (EXIT_SUCCESS);
-	init_simulation(argc, argv, &specs, &philos);
+		return (EXIT_FAILURE);
+	if (init_controller(argc, argv, &specs, &philos) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
 	threads = malloc(specs.n_philos * sizeof(pthread_t));
 	if (threads == NULL)
 	{
 		printf("Failed to allocate memory for threads\n");
-		return (EXIT_FAILURE);
+		return (cleanup(&specs), EXIT_FAILURE);
 	}
-	create_philosopher_threads(philos, &specs, threads);
-	create_monitor_thread(&monitor_thread, philos);
-	join_threads(threads, specs.n_philos, &monitor_thread);
+	if (create_controller(&specs, philos,
+			threads, &monitor_thread) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
 	cleanup(&specs);
 	free(philos);
 	free(threads);

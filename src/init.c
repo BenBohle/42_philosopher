@@ -6,7 +6,7 @@
 /*   By: bbohle <bbohle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 15:11:51 by bbohle            #+#    #+#             */
-/*   Updated: 2024/07/24 01:45:22 by bbohle           ###   ########.fr       */
+/*   Updated: 2024/07/24 19:17:25 by bbohle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,10 @@ int	init_specs(t_specs *specs, int n_philos)
 		pthread_mutex_init(&specs->forks[counter], NULL);
 		counter++;
 	}
-	pthread_mutex_init(&specs->lock, NULL);
+	// pthread_mutex_init(&specs->lock, NULL);
+	pthread_mutex_lock(&specs->stop_mutex);
 	specs->stop = 0;
+	pthread_mutex_unlock(&specs->stop_mutex);
 	return (0);
 }
 
@@ -54,24 +56,26 @@ void	init_philosophers(t_philo *philos, t_specs *specs, int n_philos)
 
 int	init_simulation(int argc, char **argv, t_specs *specs, t_philo **philos)
 {
-	if (init_specs(specs, atoi(argv[1])) == EXIT_FAILURE)
+	pthread_mutex_init(&specs->stop_mutex, NULL);
+	if (init_specs(specs, ft_atoi(argv[1])) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	specs->time_to_die = atoi(argv[2]);
-	specs->time_to_eat = atoi(argv[3]);
-	specs->time_to_sleep = atoi(argv[4]);
+	specs->time_to_die = ft_atoi(argv[2]);
+	specs->time_to_eat = ft_atoi(argv[3]);
+	specs->time_to_sleep = ft_atoi(argv[4]);
+	specs->eaten_philos = 0;
 	if (argc == 6)
 	{
-		specs->n_to_eat = atoi(argv[5]);
+		specs->n_to_eat = ft_atoi(argv[5]);
 	}
 	else
 	{
 		specs->n_to_eat = -1;
 	}
 	specs->start_time = get_current_time();
-	pthread_mutex_init(&specs->stop_mutex, NULL);
+	
 	*philos = malloc(specs->n_philos * sizeof(t_philo));
 	if (!*philos)
-		return (EXIT_FAILURE);
+		return (cleanup(specs), EXIT_FAILURE);
 	init_philosophers(*philos, specs, specs->n_philos);
 	return (0);
 }

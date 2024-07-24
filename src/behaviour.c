@@ -6,7 +6,7 @@
 /*   By: bbohle <bbohle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 23:51:09 by bbohle            #+#    #+#             */
-/*   Updated: 2024/07/24 05:07:27 by bbohle           ###   ########.fr       */
+/*   Updated: 2024/07/24 19:23:29 by bbohle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ void	take_forks(t_philo *philo, t_specs *specs)
 {
 	if (philo->id % 2 == 0)
 	{
-		pthread_mutex_lock(&specs->lock);
+		// pthread_mutex_lock(&specs->lock);
 		pthread_mutex_lock(&specs->forks[philo->left_fork]);
 		print_status(philo->id, "has taken a fork", specs);
 		pthread_mutex_lock(&specs->forks[philo->right_fork]);
 		print_status(philo->id, "has taken a fork", specs);
-		pthread_mutex_unlock(&specs->lock);
+		// pthread_mutex_unlock(&specs->lock);
 	}
 	else
 	{

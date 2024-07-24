@@ -6,7 +6,7 @@
 /*   By: bbohle <bbohle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/23 13:21:12 by bbohle            #+#    #+#             */
-/*   Updated: 2024/07/24 01:03:33 by bbohle           ###   ########.fr       */
+/*   Updated: 2024/07/24 16:47:17 by bbohle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	is_not_number(char *str)
 
 int	is_n_to_eat_zero(int argc, char **argv)
 {
-	if (argc == 6 && atoi(argv[5]) == 0)
+	if (argc == 6 && ft_atoi(argv[5]) == 0)
 		return (1);
 	return (0);
 }

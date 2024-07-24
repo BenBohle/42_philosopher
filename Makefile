@@ -1,7 +1,7 @@
 NAME	:= philo
 CFLAGS	:= -Wextra -Wall -Werror
 
-SRCS	:= src/main.c src/visuals.c src/utils.c src/init.c src/monitoring.c src/parsing.c src/behaviour.c
+SRCS	:= src/main.c src/visuals.c src/utils.c src/init.c src/monitoring.c src/parsing.c src/behaviour.c src/Controller.c
 OBJS	:= ${SRCS:.c=.o}
 all: $(NAME)
 
