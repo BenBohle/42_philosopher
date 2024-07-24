@@ -6,7 +6,7 @@
 /*   By: bbohle <bbohle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 15:17:56 by bbohle            #+#    #+#             */
-/*   Updated: 2024/07/23 15:30:33 by bbohle           ###   ########.fr       */
+/*   Updated: 2024/07/24 01:44:11 by bbohle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct s_specs
     pthread_mutex_t *forks;
     pthread_mutex_t lock;
     int stop;
+	long start_time;
 	pthread_mutex_t stop_mutex;
 
 } t_specs;
@@ -48,17 +49,33 @@ typedef struct s_philo
 } t_philo;
 
 int main(int argc, char **argv);
-void init_philosophers(t_philo *philos, t_specs *specs, int n_philos);
-void init_specs(t_specs *specs, int n_philos);
-void *philosopher_routine(void *arg);
-long get_current_time();
-void better_usleep(int microseconds);
-void *monitoring(void *arg);
-int check_input(int argc, char **argv);
+void join_threads(pthread_t *threads, int n_philos,
+		pthread_t *monitor_thread);
+void cleanup(t_specs *specs);
 
-void init_simulation(int argc, char **argv, t_specs *specs, t_philo **philos);
-void create_philosopher_threads(t_philo *philos, t_specs *specs, pthread_t *threads);
-void create_monitor_thread(pthread_t *monitor_thread, t_philo *philos);
+void *monitoring(void *arg);
+
+int init_simulation(int argc, char **argv, t_specs *specs, t_philo **philos);
+void init_philosophers(t_philo *philos, t_specs *specs, int n_philos);
+int init_specs(t_specs *specs, int n_philos);
+int create_philosopher_threads(t_philo *philos, t_specs *specs, pthread_t *threads);
+int create_monitor_thread(pthread_t *monitor_thread, t_philo *philos);
+
+int InitController(int argc, char **argv, t_specs specs, t_philo philos);
+int CreateController(t_specs *specs, t_philo *philos, pthread_t *threads, pthread_t *monitor_thread);
+
+int check_input(int argc, char **argv);
+int is_n_to_eat_zero(int argc, char **argv);
+int is_not_number(char *str);
+
+void better_usleep(int time);
+long get_current_time(void);
+
+void *philosopher_routine(void *arg);
+void sleep_philo(t_philo *philo, t_specs *specs);
+void put_forks_back(t_philo *philo, t_specs *specs);
+void eat(t_philo *philo, t_specs *specs);
+void take_forks(t_philo *philo, t_specs *specs);
 
 
 #endif
