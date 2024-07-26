@@ -57,6 +57,7 @@ void	init_philosophers(t_philo *philos, t_specs *specs, int n_philos)
 int	init_simulation(int argc, char **argv, t_specs *specs, t_philo **philos)
 {
 	pthread_mutex_init(&specs->stop_mutex, NULL);
+	pthread_mutex_init(&specs->lock, NULL);
 	if (init_specs(specs, ft_atoi(argv[1])) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	specs->time_to_die = ft_atoi(argv[2]);

@@ -30,6 +30,7 @@ typedef struct s_specs
 	int				n_to_eat;
 	int				eaten_philos;
 	pthread_mutex_t	*forks;
+	pthread_mutex_t	lock;
 	int				stop;
 	long			start_time;
 	pthread_mutex_t	stop_mutex;

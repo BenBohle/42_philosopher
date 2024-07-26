@@ -47,26 +47,6 @@ int	join_threads(pthread_t *threads, int n_philos,
 	return (0);
 }
 
-void print_mutex_addresses(t_specs *specs, t_philo *philos, int n_philos)
-{
-    printf("Address of n_philos: %p\n", (void *)&specs->n_philos);
-    printf("Address of n_forks: %p\n", (void *)&specs->n_forks);
-    printf("Address of time_to_die: %p\n", (void *)&specs->time_to_die);
-    printf("Address of time_to_eat: %p\n", (void *)&specs->time_to_eat);
-    printf("Address of time_to_sleep: %p\n", (void *)&specs->time_to_sleep);
-    printf("Address of n_to_eat: %p\n", (void *)&specs->n_to_eat);
-    printf("Address of eaten_philos: %p\n", (void *)&specs->eaten_philos);
-    printf("Address of forks: %p\n", (void *)&specs->forks);
-    printf("Address of stop: %p\n", (void *)&specs->stop);
-    printf("Address of start_time: %p\n", (void *)&specs->start_time);
-    printf("Address of stop_mutex: %p\n", (void *)&specs->stop_mutex);
-
-    for (int i = 0; i < n_philos; i++)
-    {
-        printf("Address of left_fork for philosopher %d: %p\n", i, (void *)&specs->forks[philos[i].left_fork]);
-    }
-}
-
 int	main(int argc, char **argv)
 {
 	t_specs		specs;
@@ -91,8 +71,6 @@ int	main(int argc, char **argv)
 	if (create_controller(&specs, philos,
 			threads, &monitor_thread) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	
-	print_mutex_addresses(&specs, philos, specs.n_philos);
 
 	cleanup(&specs);
 	free(philos);

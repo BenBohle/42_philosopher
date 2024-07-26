@@ -18,23 +18,28 @@ int	death_condition(t_philo *philo, t_specs *specs, int counter)
 	long	current_time;
 
 	current_time = get_current_time();
+	pthread_mutex_lock(&specs->lock);
 	if (current_time - philo[counter].last_meal > specs->time_to_die)
 	{
+		pthread_mutex_unlock(&specs->lock);
 		pthread_mutex_lock(&specs->stop_mutex);
 		specs->stop = 1;
 		print_status_dead(counter, "died", specs);
 		pthread_mutex_unlock(&specs->stop_mutex);
 		return (1);
 	}
+	pthread_mutex_unlock(&specs->lock);
 	return (0);
 }
 
 int	eat_condition(t_philo *philo, t_specs *specs, int counter)
 {
+	pthread_mutex_lock(&specs->lock);
 	if (specs->n_to_eat != -1 && philo[counter].n_eaten == specs->n_to_eat + 1)
 	{
 		specs->eaten_philos++;
 	}
+	pthread_mutex_unlock(&specs->lock);
 	if (specs->eaten_philos == specs->n_philos)
 	{
 		pthread_mutex_lock(&specs->stop_mutex);
