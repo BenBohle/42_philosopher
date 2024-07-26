@@ -40,9 +40,9 @@ void	eat(t_philo *philo, t_specs *specs)
 	better_usleep(specs->time_to_eat);
 	pthread_mutex_lock(&specs->lock);
 	philo->last_meal = get_current_time();
-	pthread_mutex_unlock(&specs->lock);
 	if (specs->n_to_eat != -1)
 		philo->n_eaten++;
+	pthread_mutex_unlock(&specs->lock);
 }
 
 void	put_forks_back(t_philo *philo, t_specs *specs)

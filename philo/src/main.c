@@ -66,7 +66,6 @@ int	main(int argc, char **argv)
 		printf("Failed to allocate memory for threads\n");
 		return (cleanup(&specs), EXIT_FAILURE);
 	}
-	print_mutex_addresses(&specs, philos, specs.n_philos);
 
 	if (create_controller(&specs, philos,
 			threads, &monitor_thread) == EXIT_FAILURE)
