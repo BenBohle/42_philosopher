@@ -30,7 +30,6 @@ int	init_specs(t_specs *specs, int n_philos)
 		pthread_mutex_init(&specs->forks[counter], NULL);
 		counter++;
 	}
-	// pthread_mutex_init(&specs->lock, NULL);
 	pthread_mutex_lock(&specs->stop_mutex);
 	specs->stop = 0;
 	pthread_mutex_unlock(&specs->stop_mutex);
@@ -74,7 +73,6 @@ int	init_simulation(int argc, char **argv, t_specs *specs, t_philo **philos)
 		specs->n_to_eat = -1;
 	}
 	specs->start_time = get_current_time();
-	
 	*philos = malloc(specs->n_philos * sizeof(t_philo));
 	if (!*philos)
 		return (cleanup(specs), EXIT_FAILURE);

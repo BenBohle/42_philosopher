@@ -23,7 +23,7 @@ void	cleanup(t_specs *specs)
 		pthread_mutex_destroy(&specs->forks[counter]);
 		counter++;
 	}
-	// pthread_mutex_destroy(&specs->lock);
+	pthread_mutex_destroy(&specs->lock);
 	pthread_mutex_destroy(&specs->stop_mutex);
 	free(specs->forks);
 }
@@ -66,11 +66,9 @@ int	main(int argc, char **argv)
 		printf("Failed to allocate memory for threads\n");
 		return (cleanup(&specs), EXIT_FAILURE);
 	}
-
 	if (create_controller(&specs, philos,
 			threads, &monitor_thread) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-
 	cleanup(&specs);
 	free(philos);
 	free(threads);

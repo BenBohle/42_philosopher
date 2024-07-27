@@ -34,14 +34,14 @@ int	is_n_to_eat_zero(int argc, char **argv)
 	return (0);
 }
 
-int is_max_int(char *str)
+int	is_max_int(char *str)
 {
-    long num;
+	long	num;
 
-    num = atol(str);
-    if (num > INT_MAX || num < INT_MIN)
-        return (1);
-    return (0);
+	num = ft_atoll(str);
+	if (num > INT_MAX || num < INT_MIN)
+		return (1);
+	return (0);
 }
 
 int	check_input(int argc, char **argv)
@@ -61,6 +61,5 @@ int	check_input(int argc, char **argv)
 			return (1);
 		counter++;
 	}
-
 	return (0);
 }

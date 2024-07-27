@@ -82,9 +82,10 @@ void				put_forks_back(t_philo *philo, t_specs *specs);
 void				eat(t_philo *philo, t_specs *specs);
 void				take_forks(t_philo *philo, t_specs *specs);
 
-int ft_atoi(const char *str);
-int ft_atoicheck(char c);
-int ft_strlen(char *str);
-long long	ft_atoll(const char *str);
+int					ft_atoi(const char *str);
+int					ft_atoicheck(char c);
+int					ft_strlen(char *str);
+long long			ft_atoll(const char *str);
+int					ft_isdigit(int c);
 
 #endif

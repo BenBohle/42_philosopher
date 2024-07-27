@@ -1,7 +1,7 @@
 NAME	:= philo
-CFLAGS	:= -Wextra -Wall -Werror -lpthread
+CFLAGS	:= -Wextra -Wall -Werror
 
-SRCS	:= src/main.c src/visuals.c src/utils.c src/init.c src/monitoring.c src/parsing.c src/behaviour.c src/Controller.c
+SRCS	:= src/main.c src/visuals.c src/utils.c src/init.c src/monitoring.c src/parsing.c src/behaviour.c src/Controller.c src/utils_integers.c
 OBJS	:= ${SRCS:.c=.o}
 all: $(NAME)
 
@@ -24,7 +24,6 @@ $(NAME): $(OBJS)
 
 clean:
 	@echo "\033[32;1mcleaned\033[0m"
-	@rm -rf $(BOBJS)
 	@rm -rf $(OBJS)
 
 fclean: clean
