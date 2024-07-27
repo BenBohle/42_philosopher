@@ -15,7 +15,7 @@
 
 void	take_forks(t_philo *philo, t_specs *specs)
 {
-	if (philo->id % 2 == 0)
+	if (philo->id % 2 != 0)
 	{
 		pthread_mutex_lock(&specs->forks[philo->left_fork]);
 		print_status(philo->id, "has taken a fork", specs);

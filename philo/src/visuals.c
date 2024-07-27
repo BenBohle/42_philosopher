@@ -49,7 +49,7 @@ void	print_status(int id, const char *status, t_specs *specs)
 	pthread_mutex_unlock(&specs->stop_mutex);
 	if (stop == 0)
 	{
-		printf("%ld %d %s\n", relative_timestamp, id, status);
+		printf("%ld %d %s\n", relative_timestamp, id + 1, status);
 	}
 }
 
@@ -60,5 +60,5 @@ void	print_status_dead(int id, const char *status, t_specs *specs)
 
 	current_time = get_current_time();
 	relative_timestamp = current_time - specs->start_time;
-	printf("%ld %d %s\n", relative_timestamp, id, status);
+	printf("%ld %d %s\n", relative_timestamp, id + 1, status);
 }
