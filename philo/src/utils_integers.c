@@ -6,7 +6,7 @@
 /*   By: bbohle <bbohle@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/27 17:06:19 by bbohle            #+#    #+#             */
-/*   Updated: 2024/07/27 17:06:52 by bbohle           ###   ########.fr       */
+/*   Updated: 2024/07/30 15:43:44 by bbohle           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,4 +87,14 @@ long long	ft_atoll(const char *str)
 		str++;
 	}
 	return (sign * result);
+}
+
+int	is_one_philo(t_specs *specs)
+{
+	if (specs->n_philos == 1)
+	{
+		better_usleep(specs->time_to_die);
+		return (1);
+	}
+	return (0);
 }

@@ -69,7 +69,7 @@ void	*monitoring(void *arg)
 				return (NULL);
 			counter++;
 		}
-		usleep(10);
+		better_usleep(1);
 	}
 	return (NULL);
 }

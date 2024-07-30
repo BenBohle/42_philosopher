@@ -44,6 +44,13 @@ int	is_max_int(char *str)
 	return (0);
 }
 
+int	is_philo_zero(char *str)
+{
+	if (ft_atoi(str) == 0)
+		return (1);
+	return (0);
+}
+
 int	check_input(int argc, char **argv)
 {
 	int	counter;
@@ -55,6 +62,8 @@ int	check_input(int argc, char **argv)
 	counter = 1;
 	while (counter != argc)
 	{
+		if (is_philo_zero(argv[counter]) == 1)
+			return (1);
 		if (is_not_number(argv[counter]) == 1)
 			return (1);
 		if (is_max_int(argv[counter]) == 1)

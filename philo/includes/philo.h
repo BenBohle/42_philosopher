@@ -87,5 +87,6 @@ int					ft_atoicheck(char c);
 int					ft_strlen(char *str);
 long long			ft_atoll(const char *str);
 int					ft_isdigit(int c);
+int					is_one_philo(t_specs *specs);
 
 #endif

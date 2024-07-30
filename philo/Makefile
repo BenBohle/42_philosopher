@@ -1,5 +1,5 @@
 NAME	:= philo
-CFLAGS	:= -Wextra -Wall -Werror
+CFLAGS	:= -Wextra -Wall -Werror -pthread -g
 
 SRCS	:= src/main.c src/visuals.c src/utils.c src/init.c src/monitoring.c src/parsing.c src/behaviour.c src/Controller.c src/utils_integers.c
 OBJS	:= ${SRCS:.c=.o}
